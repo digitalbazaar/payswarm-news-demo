@@ -1,0 +1,25 @@
+Introduction
+------------
+
+This is a demonstration application for bloggers and journalists that
+shows how PaySwarm can be used to transact micropayments across a number
+of websites using a universal payment standard.
+
+For more information about this demo, please see the following blog
+post:
+
+http://digitalbazaar.com/2010/09/13/payswarm-api
+
+Installation
+------------
+
+You must have a web server and PHP available in order to use this
+demo. To install, run the following command in a directory that is being
+served by your Apache web server:
+
+git clone git://github.com/digitalbazaar/payswarm-news-demo.git news
+
+Configuration
+-------------
+
+You must modify the 
