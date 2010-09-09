@@ -2,8 +2,8 @@ Introduction
 ------------
 
 This is a demonstration application for bloggers and journalists that
-shows how PaySwarm can be used to transact micropayments across a number
-of websites using a universal payment standard.
+shows how OAuth and PaySwarm can be used to transact micropayments across 
+a number of websites using a universal payment standard.
 
 For more information about this demo, please see the following blog
 post:
@@ -22,4 +22,13 @@ git clone git://github.com/digitalbazaar/payswarm-news-demo.git news
 Configuration
 -------------
 
-You must modify the 
+You must modify the config.inc file and change the following values to
+match your Apache setup:
+
+MYSITE.COM
+RELATIVE/PATH/TO/THIS/DIRECTORY
+YOUR_CONSUMER_KEY
+YOUR_CONSUMER_SECRET
+
+Once those variables have been updated, the demo should work for you.
+
