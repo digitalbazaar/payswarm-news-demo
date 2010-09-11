@@ -1,4 +1,10 @@
 Options -Indexes
+
+<Files *.inc>
+  order allow,deny
+  deny from all
+</Files>
+
 RewriteEngine on 
 RewriteCond %{HTTPS} off
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
