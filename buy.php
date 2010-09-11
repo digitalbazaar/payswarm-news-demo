@@ -67,7 +67,8 @@ try
       {
          // if something went wrong, clear the cookie and attempt the purchase
          // again
-         setcookie("session", "", time() - 3600);
+         setcookie(
+            "session", $id, time() - 3600, "/$DEMO_PATH/", $WEBSITE, true);
          header("Location: $BASE_URL/");
       }
    }
@@ -110,53 +111,61 @@ try
          'license_hash' => '866f3f9540e572e8cc4467f470a869242db201ba',
          'currency' => 'USD',
          'amount' => '0.01');
-      $oauth->fetch($CONTRACTS_URL, $params);
 
-      // check to see if the purchase was approved and get the remaining
-      // balance on the payment token
-      $authorized = false;
-      $balance = "0.0";
-      $items = explode("&", $oauth->getLastResponse());
-      foreach($items as $item)
+      // catch any token revocations
+      try
       {
-         $kv = explode("=", $item, 2);
-         if($kv[0] === "authorized" && $kv[1] === "true")
+         $oauth->fetch($CONTRACTS_URL, $params);
+         
+         // check to see if the purchase was approved and get the remaining
+         // balance on the payment token
+         $authorized = false;
+         $balance = "0.0";
+         $items = explode("&", $oauth->getLastResponse());
+         foreach($items as $item)
          {
-            $authorized = true;
+            $kv = explode("=", $item, 2);
+            if($kv[0] === "authorized" && $kv[1] === "true")
+            {
+               $authorized = true;
+            }
+            else if($kv[0] === "balance")
+            {
+               $balance = $kv[1];
+            }
          }
-         else if($kv[0] === "balance")
+
+         if($authorized)
          {
-            $balance = $kv[1];
+            $ptok['state'] = "valid";
+            $tok['id'] = $ptok['id'];
+            $tok['state'] = $ptok['state'];
+            $tok['token'] = $ptok['token'];
+            $tok['secret'] = $ptok['secret'];
+            $tok['amount'] = $balance;
+            // Save the access token and secret
+            $ps->save($tok);
+            $article = $_GET['article'];
+            $redir_url = "$ARTICLES_URL/$article";
+            header("Location: $redir_url");
          }
       }
-
-      if(!$authorized)
+      catch(OAuthException $E)
       {
-         error("PURCHASE RESPONSE: AUTHORIZED: $authorized BALANCE: $balance");
-      }
-      else
-      {
-         $ptok['state'] = "valid";
-         $tok['id'] = $ptok['id'];
-         $tok['state'] = $ptok['state'];
-         $tok['token'] = $ptok['token'];
-         $tok['secret'] = $ptok['secret'];
-         $tok['amount'] = $balance;
-         // Save the access token and secret
-         $ps->save($tok);
-         $article = $_GET['article'];
-         $redir_url = "$ARTICLES_URL/$article";
-         header("Location: $redir_url");
-      }
-   }
+         // if there is an error, check to see that the token has been
+         // revoked
+         $error = $oauth->getLastResponse();
+         $invalidToken = strpos($error, "bitmunk.database.NotFound");
 
-   // FIXME: This code is never executed
-   if($ptok['state'] === "valid")
-   {
-      // FIXME: check to see if the article has been purchased
-      $article = $_GET['article'];
-      $redir_url = "$ARTICLES_URL/$article";
-      header("Location: $redir_url");
+         if($invalidToken !== false)
+         {
+            setcookie(
+               "session", $id, time() - 3600, "/$DEMO_PATH/", $WEBSITE, true);
+            $fh = fopen("articles/revoked.html", "r");
+            print(fread($fh, 32768));
+            fclose($fh);
+         }
+      }
    }
 }
 catch(OAuthException $E)
