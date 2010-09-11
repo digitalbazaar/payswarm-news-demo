@@ -17,23 +17,40 @@ You must have a web server and PHP available in order to use this
 demo. To install, run the following command in a directory that is being
 served by your Apache web server:
 
-git clone git://github.com/digitalbazaar/payswarm-news-demo.git news
+   git clone git://github.com/digitalbazaar/payswarm-news-demo.git news
 
 Configuration
 -------------
 
-You must copy the config.inc.example file to a file named config.inc.
-You must modify the config.inc file and change the following values to
-work with your Apache setup:
+1. Copy the config.inc.example file to a file named config.inc.
 
-MYSITE.COM - The name of your website, such as example.org
-RELATIVE/PATH/TO/THIS/DIRECTORY - The path to this directory on the web server
-YOUR_CONSUMER_KEY - A consumer key, as issued via the PaySwarm developer site.
-YOUR_CONSUMER_SECRET - The corresponding consumer secret issued for the
-                       consumer key via the PaySwarm developer site.
+2. Modify the config.inc file and change the following values to work with your 
+Apache setup:
 
-You must also edit the .htaccess file and set the last rewrite rule to
-redirect to the proper URL.
+MYSITE.COM
+   The name of your website, such as example.org
+RELATIVE/PATH/TO/THIS/DIRECTORY
+   The path to this directory on the web server
+YOUR_CONSUMER_KEY - 
+   A consumer key, as issued via the PaySwarm developer site. You can get a key 
+   by going to the following URL: 
+   https://dev.payswarm.com:19443/home/clients/new
+YOUR_CONSUMER_SECRET
+   The corresponding consumer secret issued for the consumer key via the 
+   PaySwarm developer site. You can view your key secrets by going to the 
+   following URL: https://dev.payswarm.com:19443/home/clients
 
-Once these items have been updated, the demo should work for you.
+3. Edit the .htaccess file and set the last rewrite rule to redirect to the 
+proper URL on your web server.
+
+4. Make sure that you have the OAuth module installed for PHP:
+
+http://pecl.php.net/package/oauth
+
+To install OAuth must have the PHP 'pecl' program installed on your system. 
+Once you have pecl installed, run the following command:
+
+   pecl install oauth
+
+Once these steps have been completed, the demo should work for you.
 
