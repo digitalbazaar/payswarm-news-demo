@@ -22,13 +22,18 @@ git clone git://github.com/digitalbazaar/payswarm-news-demo.git news
 Configuration
 -------------
 
+You must copy the config.inc.example file to a file named config.inc.
 You must modify the config.inc file and change the following values to
-match your Apache setup:
+work with your Apache setup:
 
-MYSITE.COM
-RELATIVE/PATH/TO/THIS/DIRECTORY
-YOUR_CONSUMER_KEY
-YOUR_CONSUMER_SECRET
+MYSITE.COM - The name of your website, such as example.org
+RELATIVE/PATH/TO/THIS/DIRECTORY - The path to this directory on the web server
+YOUR_CONSUMER_KEY - A consumer key, as issued via the PaySwarm developer site.
+YOUR_CONSUMER_SECRET - The corresponding consumer secret issued for the
+                       consumer key via the PaySwarm developer site.
 
-Once those variables have been updated, the demo should work for you.
+You must also edit the .htaccess file and set the last rewrite rule to
+redirect to the proper URL.
+
+Once these items have been updated, the demo should work for you.
 

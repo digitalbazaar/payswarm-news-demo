@@ -15,14 +15,22 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <script type="text/javascript" src="../jquery.cookie.js"></script>
   <script type="text/javascript" src="../json2.js"></script>
+  
 <script type="text/javascript">
 function clearSession()
 {
+   var cookiePath = window.location.pathname.replace(/articles.*/, "");
+   var cookieDomain = "." + window.location.hostname;
+   var previewUrl = window.location.toString().replace("articles", "previews");
+   
+   // expire the session
    $.cookie("session", null, { 
-         expires: -1, path: '/demos/oauth/news/', 
-         domain: '.payswarm.com', secure: true
+         expires: -1, path: cookiePath, 
+         domain: cookieDomain, secure: true
       });
-   window.location = "https://payswarm.com/demos/oauth/news/previews/1";
+
+   // redirect the browser to the new URL
+   window.location = previewUrl;
 }
 
 function displayContract()

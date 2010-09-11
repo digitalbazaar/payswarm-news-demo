@@ -30,7 +30,6 @@ if($ptok === false)
 if($ptok['state'] === "authorizing" && !isset($_GET['oauth_token']))
 {
    $ptok['state'] = "initializing";
-   error("OAUTH TOKEN IS NOT SET: " . print_r($_GET, true));
 }
 
 try
@@ -74,19 +73,31 @@ try
    }
    else if($ptok['state'] === "authorizing")
    {
-      // State 1 - Handle callback from payswarm and get and store an access token
-      $oauth->setToken($_GET['oauth_token'], $ptok['secret']);
-      $access_token_info = $oauth->getAccessToken($ACCESS_URL);
-      $tok['id'] = $id;
-      $tok['state'] = "valid";
-      $tok['token'] = $access_token_info['oauth_token'];
-      $tok['secret'] = $access_token_info['oauth_token_secret'];
-      $tok['amount'] = '0.0';
-      $ps->save($tok); // Save the access token and secret
+      // State 1 - Handle callback from payswarm 
+      if(array_key_exists("oauth_verifier", $_GET))
+      {
+         // get and store an access token
+         $oauth->setToken($_GET['oauth_token'], $ptok['secret']);
+         $access_token_info = $oauth->getAccessToken($ACCESS_URL);
+         $tok['id'] = $id;
+         $tok['state'] = "valid";
+         $tok['token'] = $access_token_info['oauth_token'];
+         $tok['secret'] = $access_token_info['oauth_token_secret'];
+         $tok['amount'] = '0.0';
+         
+         // save the access token and secret
+         $ps->save($tok);
 
-      $article = $_GET['article'];
-      $redir_url = "$BUY_URL/$article?session=$id";
-      header("Location: $redir_url");
+         $article = $_GET['article'];
+         $redir_url = "$BUY_URL/$article?session=$id";
+         header("Location: $redir_url");
+      }
+      else
+      {
+         $fh = fopen("articles/denied.html", "r");
+         print(fread($fh, 32768));
+         fclose($fh);
+      }
    }
    else if($ptok['state'] === "valid")
    {
@@ -150,6 +161,7 @@ try
 }
 catch(OAuthException $E)
 {
-   print_r('<pre>' . $E . '</pre>');
+   $err = json_decode($E->lastResponse);
+   print_r('<pre>' . $E . "\nError details: \n" . print_r($err, true) . '</pre>');
 }
 ?>
