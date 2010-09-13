@@ -10,6 +10,18 @@ post:
 
 http://digitalbazaar.com/2010/09/13/payswarm-api
 
+Prerequisites
+-------------
+
+You will need the following software:
+
+- Apache2
+- PHP5
+- Sqlite3
+- PHP5-Sqlite (PDO driver for Sqlite3)
+- Pecl (PHP package manager)
+- Oauth Pecl Module (Installed through Pecl)
+
 Installation
 ------------
 
@@ -30,7 +42,9 @@ Apache setup:
 MYSITE.COM
    The name of your website, such as example.org
 RELATIVE/PATH/TO/THIS/DIRECTORY
-   The path to this directory on the web server
+   The path to this directory on the web server. Assuming the demonstration
+   path that you are serving is http://example.org/demos/news, then this value
+   should be "demos/news".
 YOUR_CONSUMER_KEY - 
    A consumer key, as issued via the PaySwarm developer site. You can get a key 
    by going to the following URL: 
@@ -40,8 +54,8 @@ YOUR_CONSUMER_SECRET
    PaySwarm developer site. You can view your key secrets by going to the 
    following URL: https://dev.payswarm.com:19443/home/clients
 
-3. Edit the .htaccess file and set the last rewrite rule to redirect to the 
-proper URL on your web server.
+3. Edit the .htaccess file and set the last rewrite rule to redirect to the
+relative path of the previews page. For example: /demos/news/
 
 4. Make sure that you have the OAuth module installed for PHP:
 
@@ -52,5 +66,7 @@ Once you have pecl installed, run the following command:
 
    pecl install oauth
 
-Once these steps have been completed, the demo should work for you.
+You should add "extension=oauth.so" to /etc/php5/apache2/conf.d/oauth.ini,
+then restart Apache.
 
+Once these steps have been completed, the demo should work for you.
