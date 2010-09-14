@@ -1,0 +1,247 @@
+/* Payswarm Demo CSS */
+
+/*- Defaults -*/
+* {
+margin:0;
+padding:0;
+}
+
+body {
+padding: 0;
+background: #fff url('img/bg.jpg') repeat-x;
+
+font: 1.25em/2.0 Georgia,Georgia;
+/*
+font-size: 1.25em;
+line-height: 2.0em;
+font-family: Georgia, serif;
+*/
+color: #303030;
+text-align: center;
+}
+
+a {
+color:#0f710f;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+/*margin:15px 0 7px 0;*/
+line-height: 1em;
+}
+
+h1 { font-size: 2em; }
+h2 { font-size: 1.4em; }
+h3 { font-size: 1.2em; }
+h4 { font-size: 120%; }
+h5 { font-size: 100%; }
+
+pre {
+font-size: 0.75em;
+line-height: 1em;
+}
+
+/*- Page Layout -*/
+#layout {
+width: 960px;
+margin: 0 auto;
+text-align: left;
+}
+
+#header {
+position: relative;
+background: #303030;
+margin-bottom: 20px;
+}
+
+#logo {
+font-family: Georgia, sans-serif;
+position: relative;
+overflow: hidden;
+
+height: 108px;
+font-size: 2em;
+font-weight: bold;
+
+margin: 0;
+line-height: 108px;
+text-align: left;
+}
+
+#logo a {
+text-decoration: none;
+color: #fff;
+
+border-left: 8px solid #0f710f;
+padding: 0px 10px 7px 10px;
+}
+
+#logo span {
+font-size: 0.75em;
+color: #676767;
+}
+
+#logo a:hover span {
+color: #fff;
+}
+
+#navigation {
+position: absolute;
+left: 270px;
+line-height: 83px;
+display: block;
+height: 108px;
+width: 530px;
+top: 0;
+text-align: right;
+font-size: 95%;
+}
+
+#navigation ul li {
+display: inline;
+}
+
+#navigation li a {
+color: #cacaca;
+padding: 50px 10px;
+text-decoration: none;
+}
+
+#navigation a:hover {
+color: #fff;
+}
+
+/*- Eyecatch -*/
+#eyecatch {
+margin: 30px 0;
+padding: 20px;
+color: #fff;
+background-color: #0e6c0e;
+-moz-border-radius-topleft: 20px;
+-moz-border-radius-bottomright: 20px;
+border-top-left-radius: 20px;
+border-bottom-right-radius: 20px;
+}
+
+#eyecatch a { color: #fff; }
+#eyecatch a:hover { text-decoration: underline; }
+
+.section {
+margin-top: 30px;
+}
+
+.section h2 {
+padding: 8px;
+color: #fff;
+background-color: #333;
+}
+
+.section h2 span {
+border-left: 6px solid #0f710f;
+padding-left: 6px;
+}
+
+.section p {
+margin-left: 20px;
+}
+
+#footer {
+margin-top: 30px;
+padding: 10px 20px;
+font-size: 0.75em;
+font-weight: bold;
+color: #b1b1b1;
+background: #303030;
+}
+
+#footer p {
+margin: 0;
+}
+
+#footer a {
+color: #b1b1b1;
+text-decoration: none;
+}
+
+#footer a:hover, #footer a:active {
+color: #fff;
+}
+
+.copyright {
+float: left;
+}
+
+.legal {
+float: right;
+}
+
+/*- Paragraphs -*/
+p { margin:15px 0; line-height: 24px; font-size: 95%}
+
+.content p {color: #fff; margin-top: 10px;}
+
+/*- Lists -*/
+ul, ol {
+margin: 10px 0 10px 50px;
+}
+
+.note {
+text-align: center;
+font-size: 0.75em;
+font-style: italic;
+font-weight: normal;
+}
+
+.purchase, .manage {
+margin: 20px 0;
+padding: 10px;
+font-family: Arial, sans-serif;
+border-top: 1px solid #bbb;
+border-bottom: 1px solid #bbb;
+}
+
+.row {
+text-align: right;
+}
+
+.money {
+color: #666;
+}
+
+.balance {
+border-bottom: 1px dotted #ddd;
+}
+
+.label {
+float: left;
+}
+
+.purchase-button {
+padding: 2px 20px;
+font-size: 1em;
+font-weight: bold;
+color: #fff;
+/*text-shadow: #000 0 0 2px;*/
+background-color: #390;
+border: 1px solid #370;
+-moz-border-radius: 4px;
+border-radius: 4px;
+cursor: pointer;
+}
+
+.purchase-button img {
+vertical-align: middle;
+}
+
+.purchase-button:hover, .purchase-button:focus {
+background-color: #4a1;
+border-color: #480;
+}
+
+.purchase-button:active {
+background-color: #280;
+border-color: #260;
+}
