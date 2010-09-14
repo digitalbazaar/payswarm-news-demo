@@ -13,14 +13,17 @@ http://digitalbazaar.com/2010/09/13/payswarm-api
 Prerequisites
 -------------
 
-You will need the following software:
+You will need to make sure that you have the following software 
+installed in order to run this demo.
 
 - Apache2
 - PHP5
 - Sqlite3
 - PHP5-Sqlite (PDO driver for Sqlite3)
+- libcurl-dev (if you don't have this, you will get HTTP 505 errors
+  when you attempt to retrieve the Payment Token)
 - Pecl (PHP package manager)
-- Oauth Pecl Module (Installed through Pecl)
+- Oauth Pecl Module (Installed via Pecl)
 
 Installation
 ------------
